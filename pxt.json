@@ -1,14 +1,20 @@
 {
     "name": "pxt-ftss-tests",
     "version": "0.0.0",
+    "dependencies": {
+        "device": "*",
+        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v1.0.0"
+    },
     "files": [
         "main.ts"
     ],
+    "testDependencies": {},
+    "targetVersions": {
+        "target": "1.12.53",
+        "targetId": "arcade"
+    },
     "supportedTargets": [
         "arcade"
     ],
-    "dependencies": {
-        "device": "*"
-    },
-    "testDependencies": {}
+    "preferredEditor": "tsprj"
 }
