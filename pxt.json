@@ -9,7 +9,8 @@
         "main.ts",
         "constructor.ts",
         "add-has.ts",
-        "clear.ts"
+        "clear.ts",
+        "short-english-list.ts"
     ],
     "testDependencies": {},
     "targetVersions": {

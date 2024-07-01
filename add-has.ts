@@ -251,6 +251,20 @@ namespace AddHasTests {
 
         }
 
+        // addAll() from short English list.
+        test = new TernaryStringSet()
+        test.addAll(ShortEnglishList.words)
+        if (test.size != ShortEnglishList.words.length) {
+            game.splash("Add/Has test 11a failed.")
+            allPassed = false
+        }
+        ShortEnglishList.words.forEach((s: string) => {
+            if (!test.has(s)) {
+                game.splash(`Add/Has test 11b failed for word ${s}.`)
+                allPassed = false
+            }
+        })
+        
         return allPassed
     }
 }
