@@ -16,6 +16,14 @@ if (!ClearTests.run()) {
     allPassed = false
 }
 
+if (!SizeTests.run()) {
+    allPassed = false
+}
+
+if (!DeleteTests.run()) {
+    allPassed = false
+}
+
 // Show summary.
 if (allPassed) {
     game.splash("All tests passed!")
