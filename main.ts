@@ -12,6 +12,10 @@ if (!AddHasTests.run()) {
     allPassed = false
 }
 
+if (!ClearTests.run()) {
+    allPassed = false
+}
+
 // Show summary.
 if (allPassed) {
     game.splash("All tests passed!")

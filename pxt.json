@@ -8,7 +8,8 @@
     "files": [
         "main.ts",
         "constructor.ts",
-        "add-has.ts"
+        "add-has.ts",
+        "clear.ts"
     ],
     "testDependencies": {},
     "targetVersions": {
