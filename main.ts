@@ -24,6 +24,10 @@ if (!DeleteTests.run()) {
     allPassed = false
 }
 
+if (!StatsTests.run()) {
+    allPassed = false
+}
+
 // Show summary.
 if (allPassed) {
     game.splash("All tests passed!")
