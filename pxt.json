@@ -6,7 +6,9 @@
         "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v1.0.0"
     },
     "files": [
-        "main.ts"
+        "main.ts",
+        "constructor.ts",
+        "add-has.ts"
     ],
     "testDependencies": {},
     "targetVersions": {
