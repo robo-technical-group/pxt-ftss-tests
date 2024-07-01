@@ -176,35 +176,44 @@ namespace DeleteTests {
         test.addAll(ShortEnglishList.words)
         if (test.size != ShortEnglishList.words.length) {
             game.splash("Delete test 7a failed.")
+            allPassed = false
         }
         if (!test.deleteAll(ShortEnglishList.words)) {
             game.splash("Delete test 7b failed.")
+            allPassed = false
         }
         if (test.size != 0) {
             game.splash("Delete test 7c failed.")
+            allPassed = false
         }
         test.addAll(["fish", "gerbil", "pigeon",])
         if (test.size != 3) {
             game.splash("Delete test 7d failed.")
+            allPassed = false
         }
         if (test.deleteAll(["gerbil", "mongoose", "pigeon",])) {
             game.splash("Delete test 7e failed.")
+            allPassed = false
         }
         test.addAll(["fish", "gerbil", "pigeon",])
         if (test.deleteAll(["mongoose", "gerbil", "pigeon,"])) {
             game.splash("Delete test 7f failed.")
+            allPassed = false
         }
         test.addAll(["fish", "gerbil", "pigeon",])
         if (test.deleteAll(["gerbil", "pigeon", "mongoose",])) {
             game.splash("Delete test 7g failed.")
+            allPassed = false
         }
         test.addAll(["fish", "gerbil", "pigeon",])
         if (test.deleteAll(["mongoose",])) {
             game.splash("Delete test 7h failed.")
+            allPassed = false
         }
         test.addAll(["fish", "gerbil", "pigeon",])
         if (!test.deleteAll(["gerbil", "pigeon",])) {
             game.splash("Delete test 7i failed.")
+            allPassed = false
         }
         
         return allPassed
