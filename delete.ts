@@ -135,6 +135,78 @@ namespace DeleteTests {
             allPassed = false
         }
 
+        // deleteAll() deletes listed elements.
+        test = new TernaryStringSet()
+        test.addAll(ShortEnglishList.words)
+        size = test.size
+        test.deleteAll(null)
+        if (test.size != size) {
+            game.splash("Delete test 6a failed.")
+            allPassed = false
+        }
+        test.deleteAll([])
+        if (test.size != size) {
+            game.splash("Delete test 6b failed.")
+            allPassed = false
+        }
+        test.deleteAll(["bear",])
+        if (test.size != size - 1) {
+            game.splash("Delete test 6c failed.")
+            allPassed = false
+        }
+        test.deleteAll(["chicken", "elephant",])
+        if (test.size != size - 3) {
+            game.splash("Delete test 6d failed.")
+            allPassed = false
+        }
+        for (let w of ["bear", "chicken", "elephant",]) {
+            if (test.has(w)) {
+                game.splash(`Delete test 6e failed for word ${w}.`)
+                allPassed = false
+            }
+        }
+        test.deleteAll(["goat", "hen",])
+        if (test.size != size - 5) {
+            game.splash("Delete test 6f failed.")
+            allPassed = false
+        }
+
+        // deleteAll() returns true if all requested elements removed.
+        test = new TernaryStringSet()
+        test.addAll(ShortEnglishList.words)
+        if (test.size != ShortEnglishList.words.length) {
+            game.splash("Delete test 7a failed.")
+        }
+        if (!test.deleteAll(ShortEnglishList.words)) {
+            game.splash("Delete test 7b failed.")
+        }
+        if (test.size != 0) {
+            game.splash("Delete test 7c failed.")
+        }
+        test.addAll(["fish", "gerbil", "pigeon",])
+        if (test.size != 3) {
+            game.splash("Delete test 7d failed.")
+        }
+        if (test.deleteAll(["gerbil", "mongoose", "pigeon",])) {
+            game.splash("Delete test 7e failed.")
+        }
+        test.addAll(["fish", "gerbil", "pigeon",])
+        if (test.deleteAll(["mongoose", "gerbil", "pigeon,"])) {
+            game.splash("Delete test 7f failed.")
+        }
+        test.addAll(["fish", "gerbil", "pigeon",])
+        if (test.deleteAll(["gerbil", "pigeon", "mongoose",])) {
+            game.splash("Delete test 7g failed.")
+        }
+        test.addAll(["fish", "gerbil", "pigeon",])
+        if (test.deleteAll(["mongoose",])) {
+            game.splash("Delete test 7h failed.")
+        }
+        test.addAll(["fish", "gerbil", "pigeon",])
+        if (!test.deleteAll(["gerbil", "pigeon",])) {
+            game.splash("Delete test 7i failed.")
+        }
+        
         return allPassed
     }
 
