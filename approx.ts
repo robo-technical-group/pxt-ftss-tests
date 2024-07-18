@@ -1,0 +1,300 @@
+namespace Approx {
+    export function run(): boolean {
+        let allPassed: boolean = true
+        if (!arrangements()) {
+            allPassed = false
+        }
+        if (!completions()) {
+            allPassed = false
+        }
+        if (!completedBy()) {
+            allPassed = false
+        }
+        return allPassed
+    }
+
+    function areEquivalent(a: string[], b: string[]): boolean {
+        if (a.length != b.length) {
+            return false
+        }
+        for (let s of a) {
+            if (b.indexOf(s) == -1) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    function arrangements(): boolean {
+        let test: TernaryStringSet
+        let allPassed: boolean = true
+        
+        test = new TernaryStringSet()
+        test.addAll([
+            "apple",
+            "baboon",
+            "ice",
+            "iced",
+            "icicle",
+            "ire",
+            "mice",
+            "nice",
+            "niece",
+            "rein",
+            "rice",
+            "spice",
+        ])
+        if (!areEquivalent([
+            "ice",
+            "ire",
+            "nice",
+            "rein",
+            "rice",
+        ], test.getArrangementsOf("nicer"))) {
+            game.splash("Arrangements test 1 failed.")
+            allPassed = false
+        }
+
+        test = new TernaryStringSet()
+        test.addAll([
+            "aah",
+            "aardvark",
+            "bar",
+            "bazaar",
+            "dark",
+            "a",
+            "aa",
+            "aaa",
+            "baa",
+        ])
+        if (!areEquivalent(["a", "aa", "dark",], test.getArrangementsOf("ardvark"))) {
+            game.splash("Arrangements test 2a failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([
+            "a",
+            "aa",
+            "aaa",
+            "aardvark",
+            "dark",
+        ], test.getArrangementsOf("aardvark"))) {
+            game.splash("Arrangements test 2b failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([], test.getArrangementsOf(""))) {
+            game.splash("Arrangements test 2c failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["a",], test.getArrangementsOf("a"))) {
+            game.splash("Arrangements test 2d failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["a", "aa",], test.getArrangementsOf("aa"))) {
+            game.splash("Arrangements test 2e failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["a", "aa", "aaa",], test.getArrangementsOf("aaa"))) {
+            game.splash("Arrangements test 2f failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["a", "aa", "aaa",], test.getArrangementsOf("aaaa"))) {
+            game.splash("Arrangements test 2g failed.")
+            allPassed = false
+        }
+
+        test = new TernaryStringSet()
+        test.addAll(["a", "b", "c",])
+        if (!areEquivalent([], test.getArrangementsOf(""))) {
+            game.splash("Arrangements test 3a failed.")
+            allPassed = false
+        }
+        test.add("")
+        if (!areEquivalent(["",], test.getArrangementsOf(""))) {
+            game.splash("Arrangements test 3b failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["",], test.getArrangementsOf("z"))) {
+            game.splash("Arrangements test 3c failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["", "a",], test.getArrangementsOf("a"))) {
+            game.splash("Arrangements test 3d failed.")
+            allPassed = false
+        }
+
+        return allPassed
+    }
+
+    function completedBy(): boolean {
+        let test: TernaryStringSet
+        let allPassed: boolean = true
+
+        const elements: string[] = [
+            "",
+            "aardvark",
+            "bumping",
+            "jumping",
+            "lamb",
+            "lifting",
+            "muskrat",
+            "trying",
+            "turtles",
+        ]
+
+        test = new TernaryStringSet(elements)
+        if (!areEquivalent(elements, test.getCompletedBy(""))) {
+            game.splash("Completed-by test 1a failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([
+            "bumping",
+            "jumping",
+            "lifting",
+            "trying",
+        ], test.getCompletedBy("ing"))) {
+            game.splash("Completed-by test 1b failed.")
+            allPassed = false
+        }
+
+        test = new TernaryStringSet(ShortEnglishList.words)
+        if (!areEquivalent(_completedBy("s", ShortEnglishList.words),
+            test.getCompletedBy("s"))) {
+                game.splash("Completed-by test 2a failed.")
+                allPassed = false
+        }
+        if (!areEquivalent(_completedBy("ing", ShortEnglishList.words),
+            test.getCompletedBy("ing"))) {
+                game.splash("Completed-by test 2b failed.")
+                allPassed = false
+        }
+        if (test.getCompletedBy("zzz").length != 0) {
+            game.splash("Completed-by test 2c failed.")
+            allPassed = false
+        }
+
+        return allPassed
+    }
+
+    function completions(): boolean {
+        let test: TernaryStringSet
+        let allPassed: boolean = true
+        const elements: string[] = [
+            "",
+            "aardvark",
+            "aardvarks",
+            "armadillo",
+            "baboon",
+            "badger",
+            "cats",
+        ]
+        test = new TernaryStringSet()
+        test.addAll(elements)
+        if (!areEquivalent(elements, test.getCompletionsOf(""))) {
+            game.splash("Completions test 1a failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([
+            "aardvark",
+            "aardvarks",
+            "armadillo",
+        ], test.getCompletionsOf("a"))) {
+            game.splash("Completions test 1b failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aardvark", "aardvarks",], test.getCompletionsOf("aa"))) {
+            game.splash("Completions test 1c failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aardvark", "aardvarks",], test.getCompletionsOf("aardvark"))) {
+            game.splash("Completions test 1d failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aardvarks",], test.getCompletionsOf("aardvarks"))) {
+            game.splash("Completions test 1e failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([], test.getCompletionsOf("aardvarkz"))) {
+            game.splash("Completions test 1f failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([], test.getCompletionsOf("aardvarksz"))) {
+            game.splash("Completions test 1g failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["baboon", "badger",], test.getCompletionsOf("b"))) {
+            game.splash("Completions test 1h failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["baboon", "badger",], test.getCompletionsOf("ba"))) {
+            game.splash("Completions test 1i failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["baboon",], test.getCompletionsOf("bab"))) {
+            game.splash("Completions test 1j failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["baboon",], test.getCompletionsOf("baboon"))) {
+            game.splash("Completions test 1k failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([], test.getCompletionsOf("z"))) {
+            game.splash("Completions test 1l failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([], test.getCompletionsOf("zaa"))) {
+            game.splash("Completions test 1m failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([], test.getCompletionsOf("babz"))) {
+            game.splash("Completions test 1n failed.")
+            allPassed = false
+        }
+
+        test = new TernaryStringSet(ShortEnglishList.words)
+        if (!areEquivalent(_completions("z", ShortEnglishList.words),
+            test.getCompletionsOf("z"))) {
+                game.splash("Completions test 2a failed.")
+                allPassed = false
+            }
+        if (!areEquivalent(_completions("wi", ShortEnglishList.words),
+            test.getCompletionsOf("wi"))) {
+            game.splash("Completions test 2b failed.")
+            allPassed = false
+        }
+        if (test.getCompletionsOf("wi").length != 14) {
+            game.splash("Completions test 2c failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([
+            "she",
+            "sheep",
+            "sheet",
+            "shelf",
+        ], test.getCompletionsOf("she"))) {
+            game.splash("Completions test 2d failed.")
+            allPassed = false
+        }
+
+        return allPassed
+    }
+
+    function _completedBy(suffix: string, elements: string[]): string[] {
+        const results: string[] = []
+        for (const s of elements) {
+            if (s.includes(suffix) && s.indexOf(suffix, s.length - suffix.length) == s.length - suffix.length) {
+                results.push(s)
+            }
+        }
+        return results
+    }
+
+    function _completions(prefix: string, elements: string[]): string[] {
+        const results: string[] = []
+        for (const s of elements) {
+            if (s.includes(prefix) && s.indexOf(prefix) == 0) {
+                results.push(s)
+            }
+        }
+        return results
+    }
+}

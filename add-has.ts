@@ -252,8 +252,7 @@ namespace AddHasTests {
         }
 
         // addAll() from short English list.
-        test = new TernaryStringSet()
-        test.addAll(ShortEnglishList.words)
+        test = new TernaryStringSet(ShortEnglishList.words)
         if (test.size != ShortEnglishList.words.length) {
             game.splash("Add/Has test 11a failed.")
             allPassed = false

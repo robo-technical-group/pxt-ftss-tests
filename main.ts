@@ -28,6 +28,10 @@ if (!StatsTests.run()) {
     allPassed = false
 }
 
+if (!Approx.run()) {
+    allPassed = false
+}
+
 // Show summary.
 if (allPassed) {
     game.splash("All tests passed!")
