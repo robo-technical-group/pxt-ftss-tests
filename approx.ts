@@ -363,6 +363,125 @@ namespace Approx {
             game.splash("Partials test 2o failed.")
             allPassed = false
         }
+
+        // getPartialMatchesOf() test matches against word list.
+        test = new TernaryStringSet(ShortEnglishList.words)
+        if (!areEquivalent(["I", "a",], test.getPartialMatchesOf("."))) {
+            game.splash("Partials test 3a failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["bean", "mean",], test.getPartialMatchesOf(".e.n"))) {
+            game.splash("Partials test 3b failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([
+            "chocolate",
+            "expensive",
+            "furniture",
+            "introduce",
+            "structure",
+            "substance",
+            "telephone",
+            "therefore",
+            "vegetable",
+            "xylophone",
+        ], test.getPartialMatchesOf("........e"))) {
+            game.splash("Partials test 3c failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["join", "jump", "just",], test.getPartialMatchesOf("j..."))) {
+            game.splash("Partials test 3d failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["juice", "quite",], test.getPartialMatchesOf(".u..e"))) {
+            game.splash("Partials test 3e failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["public",], test.getPartialMatchesOf("public"))) {
+            game.splash("Partials test 3f failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([
+            "bad",
+            "bag",
+            "can",
+            "cap",
+            "car",
+            "cat",
+            "day",
+            "ear",
+            "eat",
+            "far",
+            "hat",
+            "man",
+            "map",
+            "may",
+            "pan",
+            "pay",
+            "sad",
+            "say",
+            "was",
+            "way",
+        ], test.getPartialMatchesOf(".a."))) {
+            game.splash("Partials test 3g failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([
+            "comfortable",
+            "examination",
+            "grandfather",
+            "grandmother",
+        ], test.getPartialMatchesOf("..........."))) {
+            game.splash("Partials test 3h failed.")
+            allPassed = false
+        }
+
+        // getPartialMatchesOf() empty string handling.
+        test = new TernaryStringSet()
+        test.addAll(["", "a", "b",])
+        if (!areEquivalent(["",], test.getPartialMatchesOf(""))) {
+            game.splash("Partials test 4a failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["a", "b",], test.getPartialMatchesOf("."))) {
+            game.splash("Partials test 4b failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["a",], test.getPartialMatchesOf("a"))) {
+            game.splash("Partials test 4c failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["b",], test.getPartialMatchesOf("b"))) {
+            game.splash("Partials test 4d failed.")
+            allPassed = false
+        }
+
+        // getPartialMatchesOf() matches with non-default "don't care."
+        test = new TernaryStringSet()
+        test.addAll(["c.t", "cat", "cot", "cup", "cut",])
+        if (!areEquivalent([
+            "c.t",
+            "cat",
+            "cot",
+            "cut",
+        ], test.getPartialMatchesOf("c?t", "?"))) {
+            game.splash("Partials test 5a failed.")
+            allPassed = false
+        }
+        if (!areEquivalent([
+            "c.t",
+            "cat",
+            "cot",
+            "cup",
+            "cut",
+        ], test.getPartialMatchesOf("c??", "?"))) {
+            game.splash("Partials test 5b failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["cup",], test.getPartialMatchesOf("##p", "#"))) {
+            game.splash("Partials test 5c failed.")
+            allPassed = false
+        }
         return allPassed
     }
 

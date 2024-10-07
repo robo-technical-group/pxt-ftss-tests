@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "dependencies": {
         "device": "*",
-        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v1.6.1"
+        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v1.6.2"
     },
     "files": [
         "main.ts",
