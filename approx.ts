@@ -10,6 +10,9 @@ namespace Approx {
         if (!completedBy()) {
             allPassed = false
         }
+        if (!partials()) {
+            allPassed = false
+        }
         return allPassed
     }
 
@@ -81,7 +84,7 @@ namespace Approx {
             game.splash("Arrangements test 2b failed.")
             allPassed = false
         }
-        if (!areEquivalent([], test.getArrangementsOf(""))) {
+        if (test.getArrangementsOf("").length != 0) {
             game.splash("Arrangements test 2c failed.")
             allPassed = false
         }
@@ -275,6 +278,91 @@ namespace Approx {
             allPassed = false
         }
 
+        return allPassed
+    }
+
+    function partials(): boolean {
+        let test: TernaryStringSet
+        let allPassed: boolean = true
+        const elements: string[] = ["a", "aa", "aaa", "aab", "aaaa", "aaaaa", "aaaab", "aaaac"];
+
+        // getPartialMatchesOf() bad arguments throw.
+        test = new TernaryStringSet()
+        try {
+            test.getPartialMatchesOf(null)
+            game.splash("Partials test 1 failed.")
+            allPassed = false
+        } catch {
+        }
+
+        // getPartialMatchesOf() basic partial matches.
+        test = new TernaryStringSet()
+        test.addAll(elements)
+        if (!areEquivalent(["a",], test.getPartialMatchesOf("?", "?"))) {
+            game.splash("Partials test 2a failed.")
+            allPassed = false
+        }
+        if (test.getPartialMatchesOf("").length != 0) {
+            game.splash("Partials test 2b failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aa",], test.getPartialMatchesOf("a."))) {
+            game.splash("Partials test 2c failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aaa", "aab",], test.getPartialMatchesOf("a.."))) {
+            game.splash("Partials test 2d failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aaa", "aab",], test.getPartialMatchesOf("aa."))) {
+            game.splash("Partials test 2e failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aaa", "aab",], test.getPartialMatchesOf("..."))) {
+            game.splash("Partials test 2f failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aaa",], test.getPartialMatchesOf(".aa"))) {
+            game.splash("Partials test 2g failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aab",], test.getPartialMatchesOf(".ab"))) {
+            game.splash("Partials test 2h failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aaa",], test.getPartialMatchesOf("..a"))) {
+            game.splash("Partials test 2i failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aab",], test.getPartialMatchesOf("..b"))) {
+            game.splash("Partials test 2j failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aaa", "aab",], test.getPartialMatchesOf(".a."))) {
+            game.splash("Partials test 2k failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aaaaa", "aaaab", "aaaac",], test.getPartialMatchesOf("....."))) {
+            game.splash("Partials test 2l failed.")
+            allPassed = false
+        }
+        if (!areEquivalent(["aaaaa", "aaaab", "aaaac",], test.getPartialMatchesOf("aaaa."))) {
+            game.splash("Partials test 2m failed.")
+            allPassed = false
+        }
+        // Strings with no "don't care" can only match their exact string.
+        let pass: number = 0
+        for (let el of elements) {
+            if (!areEquivalent([el,], test.getPartialMatchesOf(el))) {
+                game.splash("Partials test 2n pass " + pass + " failed.")
+                allPassed = false
+            }
+            pass++
+        }
+        if (test.getPartialMatchesOf("Z").length != 0) {
+            game.splash("Partials test 2o failed.")
+            allPassed = false
+        }
         return allPassed
     }
 
