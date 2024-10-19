@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "dependencies": {
         "device": "*",
-        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v1.7.1"
+        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v1.9.0"
     },
     "files": [
         "main.ts",
@@ -14,7 +14,10 @@
         "size.ts",
         "delete.ts",
         "stats.ts",
-        "approx.ts"
+        "approx.ts",
+        "balance.ts",
+        "compact.ts",
+        "common.ts"
     ],
     "testDependencies": {},
     "targetVersions": {

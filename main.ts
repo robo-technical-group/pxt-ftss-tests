@@ -32,6 +32,14 @@ if (!Approx.run()) {
     allPassed = false
 }
 
+if (!Balance.run()) {
+    allPassed = false
+}
+
+if (!Compact.run()) {
+    allPassed = false
+}
+
 // Show summary.
 if (allPassed) {
     game.splash("All tests passed!")
