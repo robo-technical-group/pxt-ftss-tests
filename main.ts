@@ -4,40 +4,23 @@
  */
 let allPassed: boolean = true
 
-if (!ConstructorTests.run()) {
-    allPassed = false
-}
+let tests: (() => boolean)[] = [
+    ConstructorTests.run,
+    AddHasTests.run,
+    ClearTests.run,
+    SizeTests.run,
+    DeleteTests.run,
+    StatsTests.run,
+    Approx.run,
+    Balance.run,
+    Compact.run,
+    Serialization.run,
+]
 
-if (!AddHasTests.run()) {
-    allPassed = false
-}
-
-if (!ClearTests.run()) {
-    allPassed = false
-}
-
-if (!SizeTests.run()) {
-    allPassed = false
-}
-
-if (!DeleteTests.run()) {
-    allPassed = false
-}
-
-if (!StatsTests.run()) {
-    allPassed = false
-}
-
-if (!Approx.run()) {
-    allPassed = false
-}
-
-if (!Balance.run()) {
-    allPassed = false
-}
-
-if (!Compact.run()) {
-    allPassed = false
+for (let t of tests) {
+    if (!t()) {
+        allPassed = false
+    }
 }
 
 // Show summary.
