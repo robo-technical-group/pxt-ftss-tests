@@ -92,13 +92,30 @@ namespace Serialization {
         }
         */
 
+        // Test pre-serialized list.
+        test = new TernaryStringSet()
+        test.addAll(ShortEnglishList.words)
+        test.compact()
+        let decoded: Uint8Array = Base64.decodeBufferFromStringSet(B64Serialized.SHORT_WORD_LIST)
+        let decodedTest: TernaryStringSet = TernaryStringSet.fromBuffer(decoded.buffer)
+        if (!areSetsEqual(test, decodedTest)) {
+            game.splash("Seralization test 6 failed.")
+            allPassed = false
+        }
+
         return allPassed
     }
 
     function roundTrip(set: TernaryStringSet, testName: string): boolean {
         let passed: boolean = true
         const buff: ArrayBuffer = set.toBuffer()
-        const set2: TernaryStringSet = TernaryStringSet.fromBuffer(buff)
+        const b64encode: string[] = Base64.encodeBufferToStringSet(buff)
+        console.log(`Test ${testName} base64:`)
+        for (let s of b64encode) {
+            console.log(s)
+        }
+        const ui8decode: Uint8Array = Base64.decodeBufferFromStringSet(b64encode)
+        const set2: TernaryStringSet = TernaryStringSet.fromBuffer(ui8decode.buffer)
         if (!areSetsEqual(set, set2)) {
             game.splash(`${testName} sets equivalence test failed.`)
             passed = false
