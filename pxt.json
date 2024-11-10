@@ -19,7 +19,8 @@
         "compact.ts",
         "common.ts",
         "serialization.ts",
-        "serialized-short-list.ts"
+        "serialized-short-list.ts",
+        "get.ts"
     ],
     "testDependencies": {},
     "targetVersions": {
