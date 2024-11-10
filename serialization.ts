@@ -103,6 +103,13 @@ namespace Serialization {
             allPassed = false
         }
 
+        // Test pre-serialized list, new method.
+        let deserialized: TernaryStringSet = TernaryStringSet.fromB64StringSet(B64Serialized.SHORT_WORD_LIST)
+        if (!areSetsEqual(test, deserialized)) {
+            game.splash("Serialization test 7 failed.")
+            allPassed = false
+        }
+
         return allPassed
     }
 
