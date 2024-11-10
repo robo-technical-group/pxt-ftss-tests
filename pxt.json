@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "dependencies": {
         "device": "*",
-        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v2.1.3"
+        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v2.3.0"
     },
     "files": [
         "main.ts",
@@ -23,7 +23,7 @@
     ],
     "testDependencies": {},
     "targetVersions": {
-        "target": "1.12.56",
+        "target": "1.12.57",
         "targetId": "arcade"
     },
     "supportedTargets": [
