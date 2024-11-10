@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "dependencies": {
         "device": "*",
-        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v2.1.4"
+        "pxt-fast-ternary-string-set": "github:robo-technical-group/pxt-fast-ternary-string-set#v2.2.1"
     },
     "files": [
         "main.ts",
@@ -19,7 +19,8 @@
         "compact.ts",
         "common.ts",
         "serialization.ts",
-        "serialized-short-list.ts"
+        "serialized-short-list.ts",
+        "get.ts"
     ],
     "testDependencies": {},
     "targetVersions": {

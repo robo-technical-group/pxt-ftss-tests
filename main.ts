@@ -15,6 +15,7 @@ let tests: (() => boolean)[] = [
     Balance.run,
     Compact.run,
     Serialization.run,
+    GetTests.run,
 ]
 
 for (let t of tests) {
